@@ -1,5 +1,5 @@
 
-import React,{useEffect,useState} from 'react';
+import React,{useEffect,useState , useMemo , useCallback} from 'react';
 import './App.css';
 
 // Do not change this
@@ -46,17 +46,17 @@ function App() {
   },[dark])
 
 
-  const handleClick = ()=>{
+  const handleClick = useCallback(()=>{
     setTheme(!dark);
-  }
+  })
 
   const handleChangeValue = ()=>{
     setValue(value+1);
   }
 
-  const handleList = ()=>{
+  const handleList = useCallback(()=>{
     setList(testFunction);
-  }
+  })
 
   const styleTheme = {
    backgroundColor:dark ? "black":"#ccc7c7",
@@ -69,7 +69,7 @@ function App() {
       <h1 >{value}</h1>
       <button onClick={handleChangeValue}>Change Value</button>
       <button onClick={handleList}>Show List</button>
-      <h2>{delayFunction()}</h2>
+      <h2>{useMemo (()=>delayFunction() , value)}</h2>
       <div>
         {currentList.map((item,index)=>{
           return <h2 key={index}>{item}</h2>
