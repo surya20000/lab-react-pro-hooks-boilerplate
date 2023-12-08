@@ -23,9 +23,9 @@ function App() {
   }
 
   // should not change the LOGIC inside this function - you can make changes to the function but logic should NOT change
-  const testFunction = ()=>{
+  const testFunction = useCallback(()=>{
     return [value*3 ,value*4]
-  }
+  },[value});
 
   
 
@@ -46,9 +46,9 @@ function App() {
   },[dark])
 
 
-  const handleClick = useCallback(()=>{
+  const handleClick = ()=>{
     setTheme(!dark);
-  })
+  }
 
   const handleChangeValue = ()=>{
     setValue(value+1);
